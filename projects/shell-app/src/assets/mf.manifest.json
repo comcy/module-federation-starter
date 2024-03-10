@@ -1,0 +1,4 @@
+{
+	"homeApp": "http://localhost:4200/remoteEntry.js",
+	"profileApp": "http://localhost:4200/remoteEntry.js"
+}

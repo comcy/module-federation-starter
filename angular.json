@@ -1,7 +1,329 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1,
-  "newProjectRoot": "projects",
-  "projects": {
-  }
+	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+	"version": 1,
+	"newProjectRoot": "projects",
+	"projects": {
+		"shell-app": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss",
+					"standalone": true
+				},
+				"@schematics/angular:directive": {
+					"standalone": true
+				},
+				"@schematics/angular:pipe": {
+					"standalone": true
+				}
+			},
+			"root": "projects/shell-app",
+			"sourceRoot": "projects/shell-app/src",
+			"prefix": "shell-app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"outputPath": "dist/shell-app",
+						"index": "projects/shell-app/src/index.html",
+						"main": "projects/shell-app/src/main.ts",
+						"polyfills": [
+							"zone.js"
+						],
+						"tsConfig": "projects/shell-app/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/shell-app/src/favicon.ico",
+							"projects/shell-app/src/assets"
+						],
+						"styles": [
+							"projects/shell-app/src/styles.scss"
+						],
+						"scripts": [],
+						"extraWebpackConfig": "projects/shell-app/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "1mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "4kb"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/shell-app/webpack.prod.config.js"
+						},
+						"development": {
+							"buildOptimizer": false,
+							"optimization": false,
+							"vendorChunk": true,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"browserTarget": "shell-app:build:production",
+							"extraWebpackConfig": "projects/shell-app/webpack.prod.config.js"
+						},
+						"development": {
+							"browserTarget": "shell-app:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 4200,
+						"publicHost": "http://localhost:4200",
+						"extraWebpackConfig": "projects/shell-app/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "ngx-build-plus:extract-i18n",
+					"options": {
+						"browserTarget": "shell-app:build",
+						"extraWebpackConfig": "projects/shell-app/webpack.config.js"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/shell-app/tsconfig.spec.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/shell-app/src/favicon.ico",
+							"projects/shell-app/src/assets"
+						],
+						"styles": [
+							"projects/shell-app/src/styles.scss"
+						],
+						"scripts": []
+					}
+				}
+			}
+		},
+		"home-app": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss",
+					"standalone": true
+				},
+				"@schematics/angular:directive": {
+					"standalone": true
+				},
+				"@schematics/angular:pipe": {
+					"standalone": true
+				}
+			},
+			"root": "projects/home-app",
+			"sourceRoot": "projects/home-app/src",
+			"prefix": "home-app",
+			"architect": {
+				"build": {
+					"builder": "@angular-devkit/build-angular:browser",
+					"options": {
+						"outputPath": "dist/home-app",
+						"index": "projects/home-app/src/index.html",
+						"main": "projects/home-app/src/main.ts",
+						"polyfills": [
+							"zone.js"
+						],
+						"tsConfig": "projects/home-app/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/home-app/src/favicon.ico",
+							"projects/home-app/src/assets"
+						],
+						"styles": [
+							"projects/home-app/src/styles.scss"
+						],
+						"scripts": []
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "1mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "4kb"
+								}
+							],
+							"outputHashing": "all"
+						},
+						"development": {
+							"buildOptimizer": false,
+							"optimization": false,
+							"vendorChunk": true,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "@angular-devkit/build-angular:dev-server",
+					"configurations": {
+						"production": {
+							"browserTarget": "home-app:build:production"
+						},
+						"development": {
+							"browserTarget": "home-app:build:development"
+						}
+					},
+					"defaultConfiguration": "development"
+				},
+				"extract-i18n": {
+					"builder": "@angular-devkit/build-angular:extract-i18n",
+					"options": {
+						"browserTarget": "home-app:build"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/home-app/tsconfig.spec.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/home-app/src/favicon.ico",
+							"projects/home-app/src/assets"
+						],
+						"styles": [
+							"projects/home-app/src/styles.scss"
+						],
+						"scripts": []
+					}
+				}
+			}
+		},
+		"profile-app": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss",
+					"standalone": true
+				},
+				"@schematics/angular:directive": {
+					"standalone": true
+				},
+				"@schematics/angular:pipe": {
+					"standalone": true
+				}
+			},
+			"root": "projects/profile-app",
+			"sourceRoot": "projects/profile-app/src",
+			"prefix": "profile-app",
+			"architect": {
+				"build": {
+					"builder": "@angular-devkit/build-angular:browser",
+					"options": {
+						"outputPath": "dist/profile-app",
+						"index": "projects/profile-app/src/index.html",
+						"main": "projects/profile-app/src/main.ts",
+						"polyfills": [
+							"zone.js"
+						],
+						"tsConfig": "projects/profile-app/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/profile-app/src/favicon.ico",
+							"projects/profile-app/src/assets"
+						],
+						"styles": [
+							"projects/profile-app/src/styles.scss"
+						],
+						"scripts": []
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "1mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "4kb"
+								}
+							],
+							"outputHashing": "all"
+						},
+						"development": {
+							"buildOptimizer": false,
+							"optimization": false,
+							"vendorChunk": true,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "@angular-devkit/build-angular:dev-server",
+					"configurations": {
+						"production": {
+							"browserTarget": "profile-app:build:production"
+						},
+						"development": {
+							"browserTarget": "profile-app:build:development"
+						}
+					},
+					"defaultConfiguration": "development"
+				},
+				"extract-i18n": {
+					"builder": "@angular-devkit/build-angular:extract-i18n",
+					"options": {
+						"browserTarget": "profile-app:build"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/profile-app/tsconfig.spec.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/profile-app/src/favicon.ico",
+							"projects/profile-app/src/assets"
+						],
+						"styles": [
+							"projects/profile-app/src/styles.scss"
+						],
+						"scripts": []
+					}
+				}
+			}
+		}
+	}
 }
