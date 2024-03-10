@@ -22,26 +22,20 @@
 			"prefix": "shell-app",
 			"architect": {
 				"build": {
-					"builder": "ngx-build-plus:browser",
+					"builder": "@angular-architects/module-federation:browser",
 					"options": {
-						"outputPath": "dist/shell-app",
-						"index": "projects/shell-app/src/index.html",
-						"main": "projects/shell-app/src/main.ts",
-						"polyfills": [
-							"zone.js"
-						],
-						"tsConfig": "projects/shell-app/tsconfig.app.json",
-						"inlineStyleLanguage": "scss",
-						"assets": [
-							"projects/shell-app/src/favicon.ico",
-							"projects/shell-app/src/assets"
-						],
-						"styles": [
-							"projects/shell-app/src/styles.scss"
-						],
-						"scripts": [],
-						"extraWebpackConfig": "projects/shell-app/webpack.config.js",
-						"commonChunk": false
+					  "outputPath": "dist/shell-app",
+					  "index": "src/index.html",
+					  "main": "src/main.ts",
+					  "tsConfig": "src/tsconfig.app.json",
+					  "polyfills": "src/polyfills.ts",
+					  "aot": true,
+					  "vendorChunk": false,
+					  "commonModule": true,
+					  "remotes": {
+						"home-app": "homeApp@http://localhost:4201/remoteEntry.js",
+						"profile-app": "profileApp@http://localhost:4202/remoteEntry.js"
+					  }
 					},
 					"configurations": {
 						"production": {
